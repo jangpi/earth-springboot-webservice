@@ -1,0 +1,35 @@
+buildscript {                               // bulidscript 빌드하는 동안 필요한 처리를 모와두는곳
+    ext {                                   // ext 주로 multimodule 에서 주로 사용, 버전 변수를 관리하게 되면 각 라이브러리들의
+        springBootVersion = '2.1.7.RELEASE' // 버전 관리가 한곳에 집중되어 충돌 문제를 방지
+    }
+    repositories {      // 각종 의존성(라이브러리)들을 어떤 원격 저장소에서 받을지 정한다.
+        mavenCentral()  // 가장 기본적으로 사용되는 저장소, 라이브러리를 업로드 하기 위해 많은 과정이 필요
+        jcenter()       // 라이브러리 업로드를 간단
+    }
+    dependencies {      // 프로그램 개발에 필요한 의존성 선언
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.earth.study'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '16'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.projectlombok:lombok:1.18.20'
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-test')
+}
+
+test {
+    useJUnitPlatform()
+}
